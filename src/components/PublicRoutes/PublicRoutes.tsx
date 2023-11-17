@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useUserContext } from "../../providers/UserContext";
+import { useClientContext } from "../../providers/ClientContext";
 
 const PublicRoutes = () => {
-  const { user } = useUserContext();
+  const { client } = useClientContext();
 
-  return !user ? <Outlet /> : <Navigate to="/dashboard" />;
+  return !client ? <Outlet /> : <Navigate to="/dashboard" />;
 };
 
 export default PublicRoutes;

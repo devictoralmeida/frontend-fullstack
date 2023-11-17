@@ -5,15 +5,17 @@ import { StyledHeadline1 } from "../../styles/typography";
 import Input from "../Input/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TRegisterFormValues, registerFormSchema } from "../../schemas/registerFormSchema";
+import {
+  TRegisterFormValues,
+  registerFormSchema,
+} from "../../schemas/registerFormSchema";
 import { StyledLoaderContainer } from "../../styles/grid";
-import Select from "../Select/Select";
 import { StyledButton } from "../../styles/buttons";
-import { useUserContext } from "../../providers/UserContext";
+import { useClientContext } from "../../providers/ClientContext";
 import { useState } from "react";
 
 const RegisterForm = () => {
-  const { userRegister } = useUserContext();
+  const { clientRegister } = useClientContext();
   const [loading, setLoading] = useState(false);
 
   const {
@@ -27,7 +29,7 @@ const RegisterForm = () => {
   });
 
   const submit: SubmitHandler<TRegisterFormValues> = async (formData) => {
-    await userRegister(formData, setLoading);
+    await clientRegister(formData, setLoading);
     reset();
   };
 
@@ -40,23 +42,23 @@ const RegisterForm = () => {
       ) : (
         <FormStyles onSubmit={handleSubmit(submit)} noValidate>
           <StyledHeadline1 fontweight="bold" fontsize="big">
-            Crie sua conta
+            Registre o cliente
           </StyledHeadline1>
-          <StyledParagraph>Rapido e grátis, vamos nessa</StyledParagraph>
+          <StyledParagraph>Preencha os dados abaixo</StyledParagraph>
           <Input
             type="text"
             id="name"
-            placeholder="Digite aqui o seu nome"
+            placeholder="Nome completo do cliente"
             label="Nome"
-            error={errors.name}
+            error={errors.full_name}
             disabled={loading}
-            {...register("name")}
+            {...register("full_name")}
           />
           <Input
             type="email"
             id="email"
-            placeholder="Digite aqui seu email"
-            label="Email"
+            placeholder="E-mail do cliente"
+            label="E-mail"
             error={errors.email}
             disabled={loading}
             {...register("email")}
@@ -64,7 +66,7 @@ const RegisterForm = () => {
           <Input
             type="password"
             id="password"
-            placeholder="Digite aqui sua senha"
+            placeholder="Digite aqui a senha"
             label="Senha"
             error={errors.password}
             disabled={loading}
@@ -81,45 +83,13 @@ const RegisterForm = () => {
           />
           <Input
             type="text"
-            id="bio"
-            placeholder="Fale sobre você"
-            error={errors.bio}
-            label="Bio"
-            disabled={loading}
-            {...register("bio")}
-          />
-          <Input
-            type="text"
-            id="contact"
-            placeholder="Opção de contato"
+            id="phone"
+            placeholder="Digite o telefone do cliente"
             label="Contato"
-            error={errors.contact}
+            error={errors.phone}
             disabled={loading}
-            {...register("contact")}
+            {...register("phone")}
           />
-          <Select
-            id="course_module"
-            label="Selecionar módulo"
-            error={errors.course_module}
-            disabled={loading}
-            {...register("course_module")}
-          >
-            <option value="" selected disabled>
-              Selecione o seu módulo
-            </option>
-            <option value="Primeiro módulo (Introdução ao Frontend)">
-              Primeiro módulo (Introdução ao Frontend)
-            </option>
-            <option value="Segundo módulo (Frontend Avançado)">
-              Segundo módulo (Frontend Avançado)
-            </option>
-            <option value="Terceiro módulo (Introdução ao Backend)">
-              Terceiro módulo (Introdução ao Backend)
-            </option>
-            <option value="Quarto módulo (Backend Avançado)">
-              Quarto módulo (Backend Avançado)
-            </option>
-          </Select>
           {Object.keys(errors).length !== 0 ? (
             <StyledButton
               buttonsize="big"

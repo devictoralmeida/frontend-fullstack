@@ -1,18 +1,16 @@
-import { useUserContext } from "../../providers/UserContext";
+import { useClientContext } from "../../providers/ClientContext";
 import { StyledHeadline1, StyledParagraph } from "../../styles/typography";
 import { HeaderStyles } from "./style";
 
 const Header = () => {
-  const { user } = useUserContext();
+  const { client } = useClientContext();
 
   return (
     <HeaderStyles>
       <StyledHeadline1 fontsize="big" fontweight="bold">
-        Olá, {user?.name}
+        Olá, {client?.full_name}
       </StyledHeadline1>
-      <StyledParagraph color="gray">
-        {user?.course_module}
-      </StyledParagraph>
+      <StyledParagraph color="gray">{client?.email}</StyledParagraph>
     </HeaderStyles>
   );
 };

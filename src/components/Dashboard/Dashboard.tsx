@@ -1,32 +1,34 @@
 import { StyledButton } from "../../styles/buttons";
 import { StyledHeadline2, StyledParagraph } from "../../styles/typography";
-import TechsLists from "../TechsLists/TechsLists";
-import AddTechsModal from "../AddTechsModal/AddTechsModal";
-import { useTechsContext } from "../../providers/TechsContext";
+import ContactsLists from "../ContactsLists/ContactsLists";
+import AddContactModal from "../AddContactModal/AddContactModal";
+import { useContactsContext } from "../../providers/ContactContext";
 
 const Dashboard = () => {
-  const { isAddModal, setIsAddModal, techsLits } = useTechsContext();
+  const { isAddModal, setIsAddModal, contactsList } = useContactsContext();
+
+  console.log(contactsList)
 
   return (
     <>
-      {isAddModal ? <AddTechsModal /> : null}
+      {isAddModal ? <AddContactModal /> : null}
       <div className="dashboardContainer">
-        <div className="techs-header">
-          <StyledHeadline2 fontsize="medium">Tecnologias</StyledHeadline2>
+        <div className="contacts-header">
+          <StyledHeadline2 fontsize="medium">Contatos</StyledHeadline2>
           <StyledButton
             buttonstyle="disabled"
             buttonsize="medium"
-            padding='none'
+            padding="none"
             onClick={() => setIsAddModal(true)}
           >
             +
           </StyledButton>
         </div>
-        {techsLits.length >= 1 ? (
-          <TechsLists />
+        {contactsList.length >= 1 ? (
+          <ContactsLists />
         ) : (
           <StyledParagraph fontweight="bold" color="gray">
-            O usuário ainda não possui nenhuma tecnologia cadastrada
+            O cliente ainda não possui nenhum contato cadastrado
           </StyledParagraph>
         )}
       </div>

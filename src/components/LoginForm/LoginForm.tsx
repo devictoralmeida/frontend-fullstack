@@ -6,14 +6,17 @@ import { StyledHeadline1 } from "../../styles/typography";
 import Input from "../Input/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TLoginFormValues, loginFormSchema } from "../../schemas/loginFormSchema";
+import {
+  TLoginFormValues,
+  loginFormSchema,
+} from "../../schemas/loginFormSchema";
 import { StyledLoaderContainer } from "../../styles/grid";
 import { StyledButton, StyledLink } from "../../styles/buttons";
-import { useUserContext } from "../../providers/UserContext";
+import { useClientContext } from "../../providers/ClientContext";
 import { useState } from "react";
 
 const LoginForm = () => {
-  const { userLogin } = useUserContext();
+  const { clientLogin } = useClientContext();
   const [loading, setLoading] = useState(false);
 
   const {
@@ -27,7 +30,7 @@ const LoginForm = () => {
   });
 
   const submit: SubmitHandler<TLoginFormValues> = async (formData) => {
-    await userLogin(formData, setLoading);
+    await clientLogin(formData, setLoading);
     reset();
   };
 
@@ -49,12 +52,12 @@ const LoginForm = () => {
       ) : (
         <FormStyles onSubmit={handleSubmit(submit)} noValidate>
           <StyledHeadline1 fontweight="bold" fontsize="big">
-            Login
+            Login do cliente
           </StyledHeadline1>
           <Input
             type="email"
             id="email"
-            placeholder="Digite o seu email"
+            placeholder="Digite o email do cliente"
             label="Email"
             error={errors.email}
             disabled={loading}
@@ -64,7 +67,7 @@ const LoginForm = () => {
             <Input
               type="password"
               id="password"
-              placeholder="Digite a sua senha"
+              placeholder="Digite a senha do cliente"
               label="Senha"
               error={errors.password}
               disabled={loading}
@@ -96,10 +99,10 @@ const LoginForm = () => {
           )}
           <div className="register">
             <StyledParagraph fontweight="bold">
-              Ainda não possui uma conta?
+              Deseja cadastrar um cliente?
             </StyledParagraph>
             <StyledLink to="/register" buttonsize="big" buttonstyle="register">
-              Cadastre-se
+              Clique aqui
             </StyledLink>
           </div>
         </FormStyles>

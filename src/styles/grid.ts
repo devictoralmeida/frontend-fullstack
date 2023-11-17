@@ -58,7 +58,7 @@ export const StyledDashBoardContainer = styled.section`
     padding: 1rem;
   }
 
-  .techs-header {
+  .contacts-header {
     display: flex;
     width: 100%;
     justify-content: space-between;

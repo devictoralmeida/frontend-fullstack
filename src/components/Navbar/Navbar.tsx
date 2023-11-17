@@ -1,23 +1,23 @@
 import { NavStyles } from "./style";
 import { StyledButton, StyledLink } from "../../styles/buttons";
-import { useUserContext } from "../../providers/UserContext";
+import { useClientContext } from "../../providers/ClientContext";
 
 interface NavbarProps {
-  isbutton?: 'false' | 'true';
+  isbutton?: "false" | "true";
   text?: string;
 }
 
-const Navbar = ({ isbutton = 'false', text }: NavbarProps) => {
-  const { handleLogout } = useUserContext();
+const Navbar = ({ isbutton = "false", text }: NavbarProps) => {
+  const { handleLogout } = useClientContext();
 
   return (
-    <NavStyles isbutton={ isbutton === 'true' ? 'true' : 'false'}>
-      <p className="logo">Tech Tracker</p>
-      {isbutton === 'true' && text === "Voltar" ? (
+    <NavStyles isbutton={isbutton === "true" ? "true" : "false"}>
+      <p>ConnectMagnet</p>
+      {isbutton === "true" && text === "Voltar" ? (
         <StyledLink to="/" buttonsize="medium" buttonstyle="disabled">
           {text}
         </StyledLink>
-      ) : isbutton === 'true' && text === "Sair" ? (
+      ) : isbutton === "true" && text === "Sair" ? (
         <StyledButton
           buttonstyle="disabled"
           buttonsize="medium"

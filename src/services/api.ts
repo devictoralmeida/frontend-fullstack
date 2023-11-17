@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://tech-tracker.onrender.com",
-  timeout: 8000,
+  baseURL: "http://localhost:3333",
+  timeout: 15000,
 });
