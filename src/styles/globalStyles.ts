@@ -18,6 +18,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-grey-0: #f8f9fa;
     --color-sucess: #3fe864;
     --color-negative: #e83f5b;
+    --color-danger-1:  #ff577f;
+    --color-danger-2:  #ff427f;
 
     --font-primary: 'Inter', sans-serif;
   }

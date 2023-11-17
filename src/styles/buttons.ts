@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 interface StyledButtonProps {
-  buttonsize: 'big' | 'medium' | 'small';
-  buttonstyle: 'primary' | 'invalid' | 'disabled' | 'register';
-  padding?: 'none';
+  buttonsize: "big" | "medium" | "small";
+  buttonstyle: "primary" | "invalid" | "disabled" | "register" | "danger";
+  padding?: "none";
 }
 
 export const ButtonStyles = css<StyledButtonProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  
+
   gap: 0.5rem;
   border-radius: 0.25rem;
   font-family: var(--font-primary);
@@ -27,7 +27,7 @@ export const ButtonStyles = css<StyledButtonProps>`
     cursor: not-allowed;
   }
 
-  padding: ${({ padding }) => (padding === 'none' ? "0rem" : "0rem 1.375rem")};
+  padding: ${({ padding }) => (padding === "none" ? "0rem" : "0rem 1.375rem")};
 
   ${({ buttonsize }) => {
     switch (buttonsize) {
@@ -39,7 +39,7 @@ export const ButtonStyles = css<StyledButtonProps>`
       case "medium":
         return css`
           height: 2rem;
-          
+
           min-width: 2rem;
           width: fit-content;
         `;
@@ -88,6 +88,17 @@ export const ButtonStyles = css<StyledButtonProps>`
           &:hover {
             background-color: var(--color-grey-2);
             border: 1px solid var(--color-grey-2);
+          }
+        `;
+
+      case "danger":
+        return css`
+          background-color: var(--color-danger-1);
+          border: 1px solid var(--color-danger-1);
+
+          &:hover {
+            background-color: var(--color-danger-2);
+            border: 1px solid var(--color-danger-2);
           }
         `;
     }

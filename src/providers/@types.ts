@@ -1,4 +1,4 @@
-import { TAddContactFormValues } from "../schemas/addContactFormSchema";
+import { TEditFormValues } from "../schemas/editFormSchema";
 import { TLoginFormValues } from "../schemas/loginFormSchema";
 import { TRegisterFormValues } from "../schemas/registerFormSchema";
 
@@ -27,7 +27,7 @@ export interface IContactAddResponse {
 
 export interface IContactContext {
   addContact: (
-    formData: TAddContactFormValues,
+    formData: TEditFormValues,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
   removeContact: (
@@ -36,7 +36,7 @@ export interface IContactContext {
   ) => Promise<void>;
   editContact: (
     contactID: string,
-    formData: TAddContactFormValues,
+    formData: TEditFormValues,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
   updatedContact: Contact | null;
@@ -45,7 +45,7 @@ export interface IContactContext {
   setIsAddModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditModal: React.Dispatch<React.SetStateAction<boolean>>;
   setUpdatedContact: React.Dispatch<React.SetStateAction<Contact | null>>;
-  contactsList: [] | Contact[]
+  contactsList: [] | Contact[];
   setContactsList: React.Dispatch<React.SetStateAction<Contact[] | []>>;
 }
 
@@ -71,7 +71,7 @@ export interface IClientWithToken {
 
 export interface IClientContext {
   client: Client | null;
-  setClient: React.Dispatch<React.SetStateAction<Client | null>>,
+  setClient: React.Dispatch<React.SetStateAction<Client | null>>;
   globalLoading: boolean;
   clientLogin: (
     formData: TLoginFormValues,
@@ -83,4 +83,8 @@ export interface IClientContext {
   ) => Promise<void>;
   handleLogout: () => void;
   setGlobalLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditClientModal: boolean;
+  setIsEditClientModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isRemoveClientModal: boolean;
+  setIsRemoveClientModal: React.Dispatch<React.SetStateAction<boolean>>;
 }

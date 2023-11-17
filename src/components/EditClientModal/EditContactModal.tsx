@@ -8,17 +8,19 @@ import { StyledButton } from "../../styles/buttons";
 import { useState } from "react";
 import { useOutClick } from "../../hooks/useOutClick";
 import { useKeydownPress } from "../../hooks/useKeydownPress";
-import {
-  TAddContactFormValues,
-  addContactFormSchema,
-} from "../../schemas/addContactFormSchema";
+import { TEditFormValues, editFormSchema } from "../../schemas/editFormSchema";
+import { useClientContext } from "../../providers/ClientContext";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 const EditClientModal = () => {
-  const [loading, setLoading] = useState(false);
-  const { setIsEditModal, editContact, removeContact, updatedContact } =
+  const { client, setClient, setIsEditClientModal, setIsRemoveClientModal } =
     useClientContext();
+  const [loading, setLoading] = useState(false);
 
-  const modalRef = useOutClick(() => setIsEditModal(false));
+  const localClientToken = localStorage.getItem("@TOKEN-m6-fullstack");
+
+  const modalRef = useOutClick(() => setIsEditClientModal(false));
   const buttonRef = useKeydownPress("Escape", (element) => element?.click());
 
   const {
@@ -26,23 +28,46 @@ const EditClientModal = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TAddContactFormValues>({
-    resolver: zodResolver(addContactFormSchema),
+  } = useForm<TEditFormValues>({
+    resolver: zodResolver(editFormSchema),
     defaultValues: {
-      full_name: updatedContact!.full_name,
-      email: updatedContact!.email,
-      phone: updatedContact!.phone,
+      full_name: client!.full_name,
+      email: client!.email,
+      phone: client!.phone,
     },
   });
 
-  const submit: SubmitHandler<TAddContactFormValues> = async (formData) => {
-    await editContact(updatedContact!.id, formData, setLoading);
+  const editClient = async (formData: TEditFormValues) => {
+    try {
+      setLoading(true);
+      const { data } = await api.patch(`/clients/${client!.id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${localClientToken}`,
+        },
+      });
+
+      setClient(data);
+
+      toast.success("Cliente atualizado com sucesso", {
+        className: "toast-sucess",
+      });
+    } catch (error: any) {
+      toast.error("Oops! Algo deu errado ao atualizar o cliente", {
+        className: "toast-error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const submit: SubmitHandler<TEditFormValues> = async (formData) => {
+    await editClient(formData);
     reset();
   };
 
-  const handleDeleteContact = async (contactId: string) => {
-    await removeContact(contactId, setLoading);
-    reset();
+  const handleModals = () => {
+    setIsEditClientModal(false);
+    setIsRemoveClientModal(true);
   };
 
   return (
@@ -50,13 +75,13 @@ const EditClientModal = () => {
       <StyledClientModal ref={modalRef}>
         <header>
           <StyledHeadline3 fontweight="bold" fontsize="small">
-            Detalhes do contato
+            Detalhes do cliente
           </StyledHeadline3>
           <StyledParagraph
             fontweight="bold"
             color="gray"
             ref={buttonRef}
-            onClick={() => setIsEditModal(false)}
+            onClick={() => setIsEditClientModal(false)}
           >
             X
           </StyledParagraph>
@@ -64,21 +89,21 @@ const EditClientModal = () => {
         <FormStyles onSubmit={handleSubmit(submit)} radius="none">
           <Input
             type="text"
-            label="Nome completo do contato"
+            label="Nome completo"
             disabled={loading}
             error={errors.full_name}
             {...register("full_name")}
           />
           <Input
             type="email"
-            label="E-mail do contato"
+            label="E-mail"
             disabled={loading}
             error={errors.email}
             {...register("email")}
           />
           <Input
             type="text"
-            label="Telefone do contato"
+            label="Telefone"
             disabled={loading}
             error={errors.phone}
             {...register("phone")}
@@ -103,14 +128,12 @@ const EditClientModal = () => {
             )}
             <StyledButton
               type="button"
-              buttonsize="small"
-              buttonstyle="register"
+              buttonsize="big"
+              buttonstyle="danger"
               disabled={loading}
-              onClick={async () =>
-                await handleDeleteContact(updatedContact!.id)
-              }
+              onClick={() => handleModals()}
             >
-              Excluir
+              Excluir cliente
             </StyledButton>
           </div>
         </FormStyles>

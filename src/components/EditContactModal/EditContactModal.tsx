@@ -9,10 +9,7 @@ import { useContactsContext } from "../../providers/ContactContext";
 import { useState } from "react";
 import { useOutClick } from "../../hooks/useOutClick";
 import { useKeydownPress } from "../../hooks/useKeydownPress";
-import {
-  TAddContactFormValues,
-  addContactFormSchema,
-} from "../../schemas/addContactFormSchema";
+import { TEditFormValues, editFormSchema } from "../../schemas/editFormSchema";
 
 const EditContactsModal = () => {
   const [loading, setLoading] = useState(false);
@@ -27,8 +24,8 @@ const EditContactsModal = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TAddContactFormValues>({
-    resolver: zodResolver(addContactFormSchema),
+  } = useForm<TEditFormValues>({
+    resolver: zodResolver(editFormSchema),
     defaultValues: {
       full_name: updatedContact!.full_name,
       email: updatedContact!.email,
@@ -36,7 +33,7 @@ const EditContactsModal = () => {
     },
   });
 
-  const submit: SubmitHandler<TAddContactFormValues> = async (formData) => {
+  const submit: SubmitHandler<TEditFormValues> = async (formData) => {
     await editContact(updatedContact!.id, formData, setLoading);
     reset();
   };

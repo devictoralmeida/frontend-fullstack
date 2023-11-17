@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const addContactFormSchema = z.object({
+export const editFormSchema = z.object({
   full_name: z
     .string()
     .min(10, "O nome completo precisa conter pelo menos 10 caracteres")
@@ -15,4 +15,4 @@ export const addContactFormSchema = z.object({
     .max(12, "O Telefone poderá ter no máximo 11 caracteres"),
 });
 
-export type TAddContactFormValues = z.infer<typeof addContactFormSchema>;
+export type TEditFormValues = z.infer<typeof editFormSchema>;

@@ -20,6 +20,7 @@ export const ClientContextProvider = ({
   const [globalLoading, setGlobalLoading] = useState(false);
 
   const [isEditClientModal, setIsEditClientModal] = useState(false);
+  const [isRemoveClientModal, setIsRemoveClientModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -107,6 +108,10 @@ export const ClientContextProvider = ({
         clientRegister,
         handleLogout,
         setGlobalLoading,
+        isEditClientModal,
+        setIsEditClientModal,
+        isRemoveClientModal,
+        setIsRemoveClientModal,
       }}
     >
       {children}

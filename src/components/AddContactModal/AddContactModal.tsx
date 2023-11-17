@@ -3,10 +3,7 @@ import { FormStyles } from "../../styles/form";
 import { StyledHeadline3, StyledParagraph } from "../../styles/typography";
 import { StyledContactsModal } from "./style";
 import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  TAddContactFormValues,
-  addContactFormSchema,
-} from "../../schemas/addContactFormSchema";
+import { TEditFormValues, editFormSchema } from "../../schemas/editFormSchema";
 import Input from "../Input/Input";
 import { StyledButton } from "../../styles/buttons";
 import { useContactsContext } from "../../providers/ContactContext";
@@ -26,11 +23,11 @@ const AddContactsModal = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TAddContactFormValues>({
-    resolver: zodResolver(addContactFormSchema),
+  } = useForm<TEditFormValues>({
+    resolver: zodResolver(editFormSchema),
   });
 
-  const submit: SubmitHandler<TAddContactFormValues> = async (formData) => {
+  const submit: SubmitHandler<TEditFormValues> = async (formData) => {
     await addContact(formData, setLoading);
     reset();
   };

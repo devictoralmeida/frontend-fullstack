@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledClientModal = styled.div`
-  width: clamp(23rem, 90vw, 26rem);
+  width: clamp(18.4375rem, 90vw, 23.125rem);
   position: relative;
   background-color: var(--color-grey-3);
   border-radius: 4px;
@@ -27,11 +27,20 @@ export const StyledClientModal = styled.div`
     transform: scale(1.3);
   }
 
-  input {
+  .remove-content {
+    margin-top: 3rem;
+    min-height: 10rem;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1rem, 5vw, 1.5625rem);
+    padding-top: 0;
+    text-align: center;
   }
 
-  button {
-    font-size: 0.9rem;
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
   }
 `;

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
-import { TAddContactFormValues } from "../schemas/addContactFormSchema";
+import { TEditFormValues } from "../schemas/editFormSchema";
 import {
   Contact,
   IClientContextProviderProps,
@@ -15,8 +15,8 @@ export const ContactsContext = createContext({} as IContactContext);
 export const ContactsContextProvider = ({
   children,
 }: IClientContextProviderProps) => {
-  const { client } = useClientContext()
-  const [contactsList, setContactsList] = useState<Contact[] | []>([])
+  const { client } = useClientContext();
+  const [contactsList, setContactsList] = useState<Contact[] | []>([]);
   const [updatedContact, setUpdatedContact] = useState<Contact | null>(null);
   const [isAddModal, setIsAddModal] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
@@ -24,15 +24,12 @@ export const ContactsContextProvider = ({
 
   useEffect(() => {
     if (client) {
-      setContactsList([...client.contacts!])
-      console.log(contactsList)
+      setContactsList([...client.contacts!]);
     }
-  }, [])
-
-  
+  }, []);
 
   const addContact = async (
-    formData: TAddContactFormValues,
+    formData: TEditFormValues,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     try {
@@ -94,7 +91,7 @@ export const ContactsContextProvider = ({
 
   const editContact = async (
     contactID: string,
-    formData: TAddContactFormValues,
+    formData: TEditFormValues,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     try {
@@ -126,7 +123,7 @@ export const ContactsContextProvider = ({
       toast.error("Oops! Algo deu errado ao atualizar o seu contato", {
         className: "toast-error",
       });
-      console.error(error.message)
+      console.error(error.message);
     } finally {
       setIsEditModal(false);
       setLoading(false);
