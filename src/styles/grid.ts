@@ -37,7 +37,7 @@ export const StyledDashBoardContainer = styled.section`
   height: calc(100vh - 2.5rem);
   display: flex;
   flex-direction: column;
-  max-width: 48.4375rem;
+  max-width: 55rem;
   background-color: var(--color-grey-4);
 
   .dashboardContainer {
@@ -48,6 +48,7 @@ export const StyledDashBoardContainer = styled.section`
     margin-top: 0.6875rem;
     gap: 1.75rem;
   }
+
   .header-fullWidth {
     min-width: 100vw;
     border: 1px solid var(--color-grey-3);

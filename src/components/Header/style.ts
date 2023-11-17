@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderStyles = styled.header`
   width: 100%;
-  max-width: 48.4375rem;
+  max-width: 55rem;
   height: 7.5rem;
   display: flex;
   flex-wrap: wrap;

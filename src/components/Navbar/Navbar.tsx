@@ -18,13 +18,22 @@ const Navbar = ({ isbutton = "false", text }: NavbarProps) => {
           {text}
         </StyledLink>
       ) : isbutton === "true" && text === "Sair" ? (
-        <StyledButton
-          buttonstyle="disabled"
-          buttonsize="medium"
-          onClick={() => handleLogout()}
-        >
-          {text}
-        </StyledButton>
+        <div className="buttons-container">
+          <StyledButton
+            buttonstyle="disabled"
+            buttonsize="medium"
+            onClick={() => handleLogout()}
+          >
+            Editar meus dados
+          </StyledButton>
+          <StyledButton
+            buttonstyle="disabled"
+            buttonsize="medium"
+            onClick={() => handleLogout()}
+          >
+            {text}
+          </StyledButton>
+        </div>
       ) : null}
     </NavStyles>
   );

@@ -19,4 +19,10 @@ export const NavStyles = styled.nav<INavStylesProps>`
     font-weight: 700;
     letter-spacing: 0.1rem;
   }
+  
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 `;

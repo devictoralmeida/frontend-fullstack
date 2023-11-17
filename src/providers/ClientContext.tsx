@@ -10,7 +10,6 @@ import {
   IClientContextProviderProps,
   IClientWithToken,
 } from "./@types";
-import { useContactsContext } from "./ContactContext";
 
 export const ClientContext = createContext({} as IClientContext);
 
@@ -19,6 +18,8 @@ export const ClientContextProvider = ({
 }: IClientContextProviderProps) => {
   const [client, setClient] = useState<Client | null>(null);
   const [globalLoading, setGlobalLoading] = useState(false);
+
+  const [isEditClientModal, setIsEditClientModal] = useState(false);
 
   const navigate = useNavigate();
 

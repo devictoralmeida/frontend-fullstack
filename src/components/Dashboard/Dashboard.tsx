@@ -7,8 +7,6 @@ import { useContactsContext } from "../../providers/ContactContext";
 const Dashboard = () => {
   const { isAddModal, setIsAddModal, contactsList } = useContactsContext();
 
-  console.log(contactsList)
-
   return (
     <>
       {isAddModal ? <AddContactModal /> : null}
@@ -18,10 +16,9 @@ const Dashboard = () => {
           <StyledButton
             buttonstyle="disabled"
             buttonsize="medium"
-            padding="none"
             onClick={() => setIsAddModal(true)}
           >
-            +
+            Novo Contato
           </StyledButton>
         </div>
         {contactsList.length >= 1 ? (
