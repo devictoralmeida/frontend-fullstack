@@ -25,7 +25,6 @@ const LoginForm = () => {
     reset,
     formState: { errors },
   } = useForm<TLoginFormValues>({
-    mode: "onBlur",
     resolver: zodResolver(loginFormSchema),
   });
 

@@ -24,7 +24,6 @@ const RegisterForm = () => {
     reset,
     formState: { errors },
   } = useForm<TRegisterFormValues>({
-    mode: "onBlur",
     resolver: zodResolver(registerFormSchema),
   });
 
