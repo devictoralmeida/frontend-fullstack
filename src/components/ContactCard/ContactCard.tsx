@@ -20,8 +20,8 @@ const ContactCard = ({ contact }: IContactCardProps) => {
       <StyledHeadline3 fontweight="bold" fontsize="small">
         {contact.full_name}
       </StyledHeadline3>
-      <StyledParagraph color="gray">{contact.email}</StyledParagraph>
       <StyledParagraph color="gray">{contact.phone}</StyledParagraph>
+      <StyledParagraph color="gray" className="alter-display">{contact.email}</StyledParagraph>
     </StyledContactCard>
   );
 };

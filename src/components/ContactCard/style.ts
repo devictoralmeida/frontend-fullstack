@@ -19,4 +19,10 @@ export const StyledContactCard = styled.li`
   &:hover p {
     color: var(--color-grey-0);
   }
+
+  @media (max-width: 600px) {
+    .alter-display {
+      display: none
+    }
+  }
 `;
