@@ -1,5 +1,8 @@
-import { StyledHeadline2, StyledHeadline3, StyledParagraph } from "../../styles/typography";
-import { StyledClientModal } from "./style";
+import {
+  StyledHeadline2,
+  StyledHeadline3,
+  StyledParagraph,
+} from "../../styles/typography";
 import { StyledButton } from "../../styles/buttons";
 import { useState } from "react";
 import { useOutClick } from "../../hooks/useOutClick";
@@ -7,12 +10,19 @@ import { useKeydownPress } from "../../hooks/useKeydownPress";
 import { useClientContext } from "../../providers/ClientContext";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { StyledRemoveClientModal } from "./style";
 
 const RemoveClientModal = () => {
-  const { client, setIsRemoveClientModal, handleLogout } = useClientContext();
+  const {
+    client,
+    setIsRemoveClientModal,
+    handleLogout,
+    setIsEditClientModal,
+    setIsEditClientPasswordModal,
+  } = useClientContext();
   const [loading, setLoading] = useState(false);
 
-  const modalRef = useOutClick(() => setIsRemoveClientModal(false));
+  const modalRef = useOutClick(() => closeModals());
   const buttonRef = useKeydownPress("Escape", (element) => element?.click());
 
   const removeClient = async () => {
@@ -35,9 +45,15 @@ const RemoveClientModal = () => {
     }
   };
 
+  const closeModals = () => {
+    setIsEditClientModal(false);
+    setIsEditClientPasswordModal(false);
+    setIsRemoveClientModal(false);
+  };
+
   return (
     <div className="modalOverlay" role="dialog">
-      <StyledClientModal ref={modalRef}>
+      <StyledRemoveClientModal ref={modalRef}>
         <header>
           <StyledHeadline2 fontweight="bold" fontsize="small">
             Cliente
@@ -70,13 +86,13 @@ const RemoveClientModal = () => {
               buttonsize="medium"
               buttonstyle="register"
               disabled={loading}
-              onClick={() => setIsRemoveClientModal(true)}
+              onClick={() => closeModals()}
             >
               Voltar
             </StyledButton>
           </div>
         </div>
-      </StyledClientModal>
+      </StyledRemoveClientModal>
     </div>
   );
 };

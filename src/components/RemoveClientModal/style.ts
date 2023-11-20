@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledClientModal = styled.div`
+export const StyledRemoveClientModal = styled.div`
   width: clamp(18.4375rem, 90vw, 23.125rem);
   position: relative;
   background-color: var(--color-grey-3);

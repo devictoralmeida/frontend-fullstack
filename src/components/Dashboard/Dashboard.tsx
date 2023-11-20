@@ -4,18 +4,20 @@ import ContactsLists from "../ContactsLists/ContactsLists";
 import AddContactModal from "../AddContactModal/AddContactModal";
 import { useContactsContext } from "../../providers/ContactContext";
 import { useClientContext } from "../../providers/ClientContext";
-import EditClientModal from "../EditClientModal/EditContactModal";
+import EditClientModal from "../EditClientModal/EditClientModal";
 import RemoveClientModal from "../RemoveClientModal/RemoveClientModal";
+import EditClientPasswordModal from "../EditClientPasswordModal/EditClientPasswordModal";
 
 const Dashboard = () => {
   const { isAddModal, setIsAddModal, contactsList } = useContactsContext();
-  const { isEditClientModal, isRemoveClientModal } = useClientContext();
+  const { isEditClientModal, isRemoveClientModal, isEditClientPasswordModal } = useClientContext();
 
   return (
     <>
       {isAddModal ? <AddContactModal /> : null}
       {isEditClientModal ? <EditClientModal /> : null}
       {isRemoveClientModal ? <RemoveClientModal /> : null}
+      {isEditClientPasswordModal ? <EditClientPasswordModal /> : null}
       <div className="dashboardContainer">
         <div className="contacts-header">
           <StyledHeadline2 fontsize="medium">Contatos</StyledHeadline2>

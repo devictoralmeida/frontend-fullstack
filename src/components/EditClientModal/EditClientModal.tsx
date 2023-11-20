@@ -14,13 +14,13 @@ import { api } from "../../services/api";
 import { toast } from "react-toastify";
 
 const EditClientModal = () => {
-  const { client, setClient, setIsEditClientModal, setIsRemoveClientModal } =
+  const { client, setClient, setIsEditClientModal, setIsRemoveClientModal, setIsEditClientPasswordModal } =
     useClientContext();
   const [loading, setLoading] = useState(false);
 
   const localClientToken = localStorage.getItem("@TOKEN-m6-fullstack");
 
-  const modalRef = useOutClick(() => setIsEditClientModal(false));
+  const modalRef = useOutClick(() => closeModals());
   const buttonRef = useKeydownPress("Escape", (element) => element?.click());
 
   const {
@@ -56,6 +56,7 @@ const EditClientModal = () => {
         className: "toast-error",
       });
     } finally {
+      setIsEditClientModal(false);
       setLoading(false);
     }
   };
@@ -65,10 +66,23 @@ const EditClientModal = () => {
     reset();
   };
 
-  const handleModals = () => {
+  const handleDeleteModal = () => {
     setIsEditClientModal(false);
+    setIsEditClientPasswordModal(false)
     setIsRemoveClientModal(true);
   };
+
+  const handleEditPasswordModal = () => {
+    setIsEditClientModal(false);
+    setIsRemoveClientModal(false);
+    setIsEditClientPasswordModal(true)
+  };
+
+  const closeModals = () => {
+    setIsEditClientModal(false);
+    setIsEditClientPasswordModal(false)
+    setIsRemoveClientModal(false);
+  }
 
   return (
     <div className="modalOverlay" role="dialog">
@@ -81,7 +95,7 @@ const EditClientModal = () => {
             fontweight="bold"
             color="gray"
             ref={buttonRef}
-            onClick={() => setIsEditClientModal(false)}
+            onClick={() => closeModals()}
           >
             X
           </StyledParagraph>
@@ -129,9 +143,18 @@ const EditClientModal = () => {
             <StyledButton
               type="button"
               buttonsize="big"
+              buttonstyle="register"
+              disabled={loading}
+              onClick={() => handleEditPasswordModal()}
+            >
+              Editar Senha
+            </StyledButton>
+            <StyledButton
+              type="button"
+              buttonsize="big"
               buttonstyle="danger"
               disabled={loading}
-              onClick={() => handleModals()}
+              onClick={() => handleDeleteModal()}
             >
               Excluir cliente
             </StyledButton>

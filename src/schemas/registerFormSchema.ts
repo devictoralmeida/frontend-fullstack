@@ -16,8 +16,13 @@ export const registerFormSchema = z
       .regex(/(?=.*?[0-9])/, "É necessário pelo menos um número")
       .regex(/(?=.*[a-z])/, "É necessário ao menos uma letra minúscula")
       .regex(/(?=.*?[A-Z])/, "É necessário ao menos uma letra maiúscula")
-      .regex(/(?=.*[$*&@#])/, "É necessário pelo menos um caractere especial"),
-    confirm: z.string().nonempty("A confirmação de senha é obrigatória"),
+      .regex(/(?=.*[$*&@#!])/, "É necessário pelo menos um caractere especial"),
+    confirm: z
+      .string()
+      .min(
+        6,
+        "A confirmação de senha é obrigatória e deve ter pelo menos 6 caracteres"
+      ),
     phone: z
       .string()
       .min(11, "O Telefone precisa conter pelo menos 10 caracteres")

@@ -102,7 +102,7 @@ const EditContactsModal = () => {
             <StyledButton
               type="button"
               buttonsize="small"
-              buttonstyle="register"
+              buttonstyle="danger"
               disabled={loading}
               onClick={async () =>
                 await handleDeleteContact(updatedContact!.id)

@@ -87,4 +87,6 @@ export interface IClientContext {
   setIsEditClientModal: React.Dispatch<React.SetStateAction<boolean>>;
   isRemoveClientModal: boolean;
   setIsRemoveClientModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditClientPasswordModal: boolean;
+  setIsEditClientPasswordModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
